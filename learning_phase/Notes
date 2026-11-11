@@ -1,0 +1,11 @@
+A widget is an immutable Dart object that describes what a piece of UI should look like right now. Key word: describes. A widget is not the thing on the screen — it's the blueprint for it. When you write Text('hello'), nothing gets drawn; you just created a small object holding data ("hello", a font size, a color). That's it. It's configuration, not pixels.
+What actually happens when you write Text('hello'):
+Flutter keeps three trees internally:
+Widget tree — your blueprints. Cheap, throwaway, rebuilt constantly.
+Element tree — the managers. One per widget position, they persist across rebuilds and hold where things live in the tree.
+RenderObject tree — the workers. They do the actual measuring, layout, and painting to pixels.
+Flow: your build() returns widgets → Flutter compares them against the previous frame's widgets → wherever something differs, it updates the corresponding Element/RenderObject. If nothing changed, nothing gets redrawn.
+Why immutability matters: because widgets are just data, rebuilding them is nearly free. setState doesn't mutate your UI — it re-runs build(), which produces a fresh description, and Flutter figures out the minimal change to make real. Same idea as React's virtual DOM diffing. That's why widgets feel disposable — they're meant to be.
+Your Compose anchor: in Compose you call composable functions that emit UI; in Flutter build() returns the description instead. Compose literally borrowed Flutter's model. The difference is only syntax.
+And "everything is a widget" is literal: Padding, Center, Column are all widgets with no visual of their own — they're blueprints that just describe arrangement of the widgets inside them. Even your KeyCap will be a widget whose build() returns other widgets, which return other widgets, until it bottoms out at low-level primitives that finally talk to RenderObjects.
+The one-sentence version to burn in: a widget is an immutable description of UI; Flutter builds real on-screen objects from those descriptions and keeps them in sync.
