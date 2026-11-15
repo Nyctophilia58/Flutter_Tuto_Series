@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:learning_phase/widgets/widgetsTree.dart';
+import 'Riverpod/screens/home_screen.dart';
 
 void main() {
   runApp(
-    MyApp()
+    const ProviderScope(child: MyApp())
   );
 }
 
@@ -15,9 +17,20 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.blueAccent,
+          brightness: Brightness.light,
+        ),
       ),
-      home: const WidgetsTree(),
+      darkTheme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.blueAccent,
+          brightness: Brightness.dark,
+        )
+      ),
+      themeMode: ThemeMode.light,
+      // home: const WidgetsTree(),
+      home: const HomeScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
