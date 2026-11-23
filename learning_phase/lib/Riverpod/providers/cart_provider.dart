@@ -1,12 +1,18 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../models/product.dart';
 
-class CartNotifier extends Notifier<Set<Product>>{
+part 'cart_provider.g.dart';
+
+// To generate a Notifier Provider
+@riverpod
+class CartNotifier extends _$CartNotifier {
+// class CartNotifier extends Notifier<Set<Product>>{
 
   @override
   Set<Product> build() {
     return {
-      Product(id: '1', title: 'Groovy Shorts', price: 12, image: 'assets/products/shorts.png'),
+      // Product(id: '1', title: 'Groovy Shorts', price: 12, image: 'assets/products/shorts.png'),
     };
   }
 
@@ -24,6 +30,6 @@ class CartNotifier extends Notifier<Set<Product>>{
   }
 }
 
-final cartNotifierProvider = NotifierProvider<CartNotifier, Set<Product>>((){
-  return CartNotifier();
-});
+// final cartNotifierProvider = NotifierProvider<CartNotifier, Set<Product>>((){
+//   return CartNotifier();
+// });
