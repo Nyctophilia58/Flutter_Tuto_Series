@@ -41,7 +41,7 @@ final class CartNotifierProvider
   }
 }
 
-String _$cartNotifierHash() => r'bc7c20061a6440ae6d309b94a50f89ef7f76bc23';
+String _$cartNotifierHash() => r'6a8061c739d3142d9d4a9629c0492858eb8bd450';
 
 abstract class _$CartNotifier extends $Notifier<Set<Product>> {
   Set<Product> build();
@@ -60,3 +60,43 @@ abstract class _$CartNotifier extends $Notifier<Set<Product>> {
     return element.handleCreate(ref, build);
   }
 }
+
+@ProviderFor(cartTotal)
+final cartTotalProvider = CartTotalProvider._();
+
+final class CartTotalProvider extends $FunctionalProvider<int, int, int>
+    with $Provider<int> {
+  CartTotalProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'cartTotalProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$cartTotalHash();
+
+  @$internal
+  @override
+  $ProviderElement<int> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  int create(Ref ref) {
+    return cartTotal(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(int value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<int>(value),
+    );
+  }
+}
+
+String _$cartTotalHash() => r'74e35089e7b726533d98bdfa9d78458a55f208ed';

@@ -11,8 +11,7 @@ class CartNotifier extends _$CartNotifier {
 
   @override
   Set<Product> build() {
-    return {
-      // Product(id: '1', title: 'Groovy Shorts', price: 12, image: 'assets/products/shorts.png'),
+    return const {
     };
   }
 
@@ -33,3 +32,16 @@ class CartNotifier extends _$CartNotifier {
 // final cartNotifierProvider = NotifierProvider<CartNotifier, Set<Product>>((){
 //   return CartNotifier();
 // });
+
+// Dependent Provider
+@riverpod
+int cartTotal(dynamic ref) {
+  final cartProducts = ref.watch(cartProvider);
+
+  int total = 0;
+  for (Product product in cartProducts) {
+    total += product.price;
+  }
+
+  return total;
+}
