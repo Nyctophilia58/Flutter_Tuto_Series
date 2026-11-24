@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:learning_phase/Riverpod/providers/cart_provider.dart';
 import 'package:learning_phase/Riverpod/providers/products_provider.dart';
 import '../shared/cart_icon.dart';
+import '../shared/theme_icon.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -15,7 +16,7 @@ class HomeScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Garage Sale Products"),
-        actions: const [CartIcon()],
+        actions: const [ThemeIcon(), CartIcon()],
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
